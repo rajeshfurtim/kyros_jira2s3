@@ -2,6 +2,7 @@ from boto3.session import Session
 
 import config
 import json
+import logging
 
 session = Session(aws_access_key_id=config.s3.access_key,
                   aws_secret_access_key=config.s3.secret_key)
@@ -29,6 +30,7 @@ def writeToMaster(issue):
 def writeToIncremental(folder, filename, issues):
     s3 = session.resource('s3')
     filePath = config.s3.incremental_folder_path + folder + filename + ".json"
+    logging.info("Writing incremental to " + filePath)
     ret = s3.Object(config.s3.bucket_name, filePath).put(Body=json.dumps(issues))
     #print(ret)
 
@@ -40,11 +42,9 @@ def getLastRunFile():
     s3 = session.resource('s3')
     obj = s3.Object(config.s3.bucket_name, config.s3.lastrun_file)
     body = obj.get()['Body'].read()
-    print(body)
     return body
 
 def getBucketInfo():
-    print("inside get bucket info")
     s3 = session.resource('s3')
     bucket = s3.Bucket(config.s3.bucket_name)
 
