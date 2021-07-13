@@ -3,13 +3,13 @@ import logging
 class JiraSettings():
     server_url = "https://humanmanaged.atlassian.net"
     user = "integration@humanmanaged.com"
-    api_token = "T1tsbVLfIFE4ZLc8ojJz2C93"
+    api_token = "<api_token>"
     project_code = "BRVM"
     issue_type = "Vulnerability"
 
 class S3Settings():
-    access_key = "AKIAZTHLLAARHCPNXVYM"
-    secret_key = "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"
+    access_key = "<access_key>"
+    secret_key = "<secret_key>"
     bucket_name = "bladerunner-jira-alerts"
     lastrun_file = "lastrun.txt"
     master_folder_path = "vulnerability/master/"

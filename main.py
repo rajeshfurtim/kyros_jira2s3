@@ -62,7 +62,8 @@ def recordIncrementalIssuesToS3():
             jsonval.append(issue.raw)
             #print(issue.raw)
         startAt = i-1
-    s3s.writeToIncremental(getFolderPathForTimeStamp(), getTimestampFilename(), jsonval)
+    if (issuesLength > 0) :
+        s3s.writeToIncremental(getFolderPathForTimeStamp(), getTimestampFilename(), jsonval)
     s3s.updateLastRunFile(tillDate)
 
 def main():
